@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>飞翔的哆啦A梦</title>
+	<style>
+		*{margin: 0;padding: 0;list-style: none;}
+		/*
+		KISSY CSS Reset
+		理念：1. reset 的目的不是清除浏览器的默认样式，这仅是部分工作。清除和重置是紧密不可分的。
+		2. reset 的目的不是让默认样式在所有浏览器下一致，而是减少默认样式有可能带来的问题。
+		3. reset 期望提供一套普适通用的基础样式。但没有银弹，推荐根据具体需求，裁剪和修改后再使用。
+		特色：1. 适应中文；2. 基于最新主流浏览器。
+		维护：玉伯<lifesinger@gmail.com>, 正淳<ragecarrier@gmail.com>
+		 */
+
+		/** 清除内外边距 **/
+		body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+		dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+		pre, /* text formatting elements 文本格式元素 */
+		form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+		th, td /* table elements 表格元素 */ {
+		  margin: 0;
+		  padding: 0;
+		}
+
+		/** 设置默认字体 **/
+		body,
+		button, input, select, textarea /* for ie */ {
+		  font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+		}
+		h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+		address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */
+		code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 统一等宽字体 */
+		small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+		/** 重置列表元素 **/
+		ul, ol { list-style: none; }
+
+		/** 重置文本格式元素 **/
+		a { text-decoration: none; }
+		a:hover { text-decoration: underline; }
+
+
+		/** 重置表单元素 **/
+		legend { color: #000; } /* for ie6 */
+		fieldset, img { border: 0; } /* img 搭车：让链接里的 img 无边框 */
+		button, input, select, textarea { font-size: 100%; } /* 使得表单元素在 ie 下能继承字体大小 */
+		/* 注：optgroup 无法扶正 */
+
+		/** 重置表格元素 **/
+		table { border-collapse: collapse; border-spacing: 0; }
+
+		/* 清除浮动 */
+		.ks-clear:after, .clear:after {
+		  content: '\20';
+		  display: block;
+		  height: 0;
+		  clear: both;
+		}
+
+		.canvas{
+		    width: 580px;
+		    height: 322px;
+		    margin: 200px auto;
+		    position: relative;
+		    background:linear-gradient(to bottom,#2E8EE5,#60C0F2);
+		    background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#2E8EE5), to(#60C0F2));
+		    overflow: hidden;
+		}
+		.canvas *{
+		    position: absolute;
+		    box-sizing: border-box;
+		}
+		.bg{
+		    width: 100%;
+		    height: 100%;
+		    left:0;
+		    top:0;
+		}
+		.cloud_group{
+		    width: 200%;
+		    height: 100%;
+		    left:0;
+		    top:0;
+		}
+		.cloud_running{
+		    animation: clouding 4s linear infinite;
+		}
+		@keyframes clouding {
+		    0%{
+		        left: 0;
+		    }
+		    100%{
+		        left: 580px;
+		    }
+		}
+		.cloud_group_1{
+		    width: 50%;
+		    height: 100%;
+		    left:0;
+		    top:0;
+		}
+		.cloud_group_2{
+		    width: 50%;
+		    height: 100%;
+		    left:-50%;
+		    top:0;
+		}
+		.cloud_1{
+		    top: 16px;
+		    left: 80px;
+		    width: 130px;
+		    height:70px;
+		}
+		.list_1{
+		    width: 50px;
+		    height:34px;
+		    left:34px;
+		    top:1px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.list_2{
+		    width: 30px;
+		    height: 30px;
+		    left: 72px;
+		    top: 7px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.list_3{
+		    width: 30px;
+		    height: 30px;
+		    left: 88px;
+		    top: 13px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.list_4{
+		    width: 25px;
+		    height: 16px;
+		    left: 96px;
+		    top: 27px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.list_5{
+		    top: 36px;
+		    left: 65px;
+		    width: 44px;
+		    height: 22px;
+		    border-radius: 50%;
+		    transform: rotate(10deg);
+		    background: #f2f2f2;
+		    z-index: 4;
+		}
+		.list_6{
+		    width: 30px;
+		    height: 30px;
+		    left: 48px;
+		    top: 28px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		    z-index: 3;
+		}
+		.list_7{
+		    width: 44px;
+		    height: 22px;
+		    left: 28px;
+		    top: 32px;
+		    transform: rotate(-8deg);
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		    z-index: 2;
+		}
+		.list_8{
+		    width: 40px;
+		    height: 26px;
+		    left: 12px;
+		    top: 14px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.list_9{
+		    width: 20px;
+		    height: 20px;
+		    left: 24px;
+		    top: 6px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.list_4, .list_5, .list_6, .list_7, .list_8{
+		    box-shadow: 0 6px 2px #8DB9DE;
+		}
+		.list_8{
+		    box-shadow: -4px 2px 1px #8DB9DE, -4px 6px 1px #8DB9DE;
+		}
+		.list_7{
+		    box-shadow: -4px 6px 1px #8DB9DE;
+		}
+		.list_5{
+		    box-shadow: 4px 6px 1px #8DB9DE, 4px 2px 1px #8DB9DE;
+		}
+		.list_4{
+		    box-shadow: 2px 6px 1px #8DB9DE, 3px 2px 1px #8DB9DE;
+		}
+		.list_10{
+		    width: 30px;
+		    height: 30px;
+		    left: 63px;
+		    top: 17px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+
+
+		.cloud_2{
+		    left: 44px;
+		    top: 200px;
+		}
+		.cloud_3{
+		    width: 187px;
+		    height: 110px;
+		    top: 117px;
+		    left: 408px;
+		}
+
+		.black_1{
+		    width: 40px;
+		    height: 20px;
+		    left: 0;
+		    top: 76px;
+		    transform: rotate(45deg);
+		    background: #8DB9DE;
+		    border-radius: 50%;
+		}
+		.black_2{
+		    width: 40px;
+		    height: 20px;
+		    left: 20px;
+		    top: 80px;
+		    transform: rotate(45deg);
+		    background: #8DB9DE;
+		    border-radius: 50%;
+		}
+		.black_3{
+		    width: 40px;
+		    height: 20px;
+		    left: 35px;
+		    top: 78px;
+		    transform: rotate(45deg);
+		    background: #8DB9DE;
+		    border-radius: 50%;
+		}
+		.black_4{
+		    width: 40px;
+		    height: 20px;
+		    left: 50px;
+		    top: 76px;
+		    transform: rotate(45deg);
+		    background: #8DB9DE;
+		    border-radius: 50%;
+		}
+		.black_5{
+		    width: 40px;
+		    height: 60px;
+		    top: 46px;
+		    left: 89px;
+		    transform: rotate(45deg);
+		    background: #8DB9DE;
+		    border-radius: 50%;
+		}
+		.black_6{
+		    width: 46px;
+		    height: 20px;
+		    top: 75px;
+		    left: 105px;
+		    transform: rotate(-13deg);
+		    background: #8DB9DE;
+		    border-radius: 50%;
+		}
+		.white_1{
+		    width: 40px;
+		    height: 20px;
+		    left: -4px;
+		    top: 70px;
+		    transform: rotate(45deg);
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.white_2{
+		    width: 50px;
+		    height: 50px;
+		    left: 20px;
+		    top: 44px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.white_3{
+		    width: 50px;
+		    height: 50px;
+		    left: 61px;
+		    top: 44px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.black_7{
+		    width: 40px;
+		    height: 60px;
+		    top: 35px;
+		    left: 108px;
+		    transform: rotate(45deg);
+		    background: #8DB9DE;
+		    border-radius: 50%;
+		}
+		.black_8{
+		    width: 24px;
+		    height: 15px;
+		    top: 70px;
+		    left: 135px;
+		    transform: rotate(45deg);
+		    background: #8DB9DE;
+		    border-radius: 50%;
+		    /*box-shadow: 2px 6px 1px #8DB9DE;*/
+		}
+		.white_4{
+		    width: 40px;
+		    height: 60px;
+		    top: 35px;
+		    left: 105px;
+		    transform: rotate(45deg);
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.white_5{
+		    width: 24px;
+		    height: 15px;
+		    top: 70px;
+		    left: 131px;
+		    transform: rotate(45deg);
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		    /*box-shadow: 2px 6px 1px #8DB9DE;*/
+		}
+		.white_6{
+		    width: 50px;
+		    height: 50px;
+		    top: 30px;
+		    left: 97px;
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.white_7{
+		    width: 30px;
+		    height: 50px;
+		    top: 23px;
+		    left: 74px;
+		    transform: rotate(45deg);
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.white_8{
+		    width: 70px;
+		    height: 50px;
+		    top: 14px;
+		    left: 24px;
+		    transform: rotate(20deg);
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.white_9{
+		    width: 36px;
+		    height: 36px;
+		    top: 35px;
+		    left: 4px;
+		    transform: rotate(20deg);
+		    background: #f2f2f2;
+		    border-radius: 50%;
+		}
+		.fg{
+		    width: 100%;
+		    height: 100%;
+		    top: 0;
+		    left: 0;
+		}
+
+
+		/*哆啦A梦*/
+		.a_meng{
+		    width: 226px;
+		    height: 140px;
+		    left: 180px;
+		    top: 100px;
+		    z-index: 2;
+		}
+		.head{
+		    width: 125px;
+		    height: 125px;
+		    border-radius: 50%;
+		    background: #0A9CC3;
+		    border: 1px solid #000;
+		}
+		.face{
+		    left: 7px;
+		    top: 23px;
+		    width: 117px;
+		    height: 100px;
+		    border-radius: 50%;
+		    border: 1px solid #000;
+		    background: #f2f2f2;
+		    transform: rotate(-21deg);
+		}
+		.left_eye{
+		    width:22px;
+		    height:34px;
+		    border-radius: 50%;
+		    background: #f2f2f2;
+		    top: 21px;
+		    left: 16px;
+		    border: 1px solid #000;
+		    z-index: 2;
+		}
+		.right_eye{
+		    width:22px;
+		    height:34px;
+		    border-radius: 50%;
+		    background: #f2f2f2;
+		    top: 14px;
+		    left: 35px;
+		    border: 1px solid #000;
+		    transform: rotate(-8deg);
+		    z-index: 2;
+		}
+		.left_line_eye{
+		    width: 14px;
+		    height: 14px;
+		    border: 2px solid #000;
+		    left: 8px;
+		    top: 14px;
+		    border-left: none;
+		    border-bottom: none;
+		    border-right: none;
+		    transform: rotate(-30deg);
+		    border-radius: 50%;
+		    z-index: 2;
+		}
+		.right_line_eye{
+		    width: 14px;
+		    height: 14px;
+		    border: 2px solid #000;
+		    left: 2px;
+		    top: 14px;
+		    border-left: none;
+		    border-bottom: none;
+		    border-right: none;
+		    transform: rotate(-30deg);
+		    border-radius: 50%;
+		    z-index: 2;
+		}
+
+		.nurse{
+		    width: 16px;
+		    height: 16px;
+		    border: 1px solid #000;
+		    background: radial-gradient(6px 6px at 3px 5px, #f2f2f2 30%, #C43D4B 100%);
+		    border-radius: 50%;
+		    left: 28px;
+		    top: 45px;
+		    z-index: 2;
+		}
+
+		.mouse_box{
+		    width: 100px;
+		    height: 50px;
+		    transform: rotate(-45deg);
+		    left: 26px;
+		    top: 61px;
+		    overflow: hidden;
+		}
+		.mouse{
+		    width: 120px;
+		    height: 90px;
+		    border-radius: 50%;
+		    background: linear-gradient(to right, transparent 0%, transparent 60%, #BC3F3D 60%, #BC3F3D 100% );
+		    transform: rotate(90deg);
+		    z-index: 0;
+		    left: -9px;
+		    top: -56px;
+		    border: 1px solid #000;
+		    overflow: hidden;
+		}
+		.tongue{
+		    width: 60px;
+		    height: 30px;
+		    border: 1px solid #000;
+		    background: #EE7562;
+		    transform: rotate(90deg);
+		    border-radius: 50%;
+		    right: -18px;
+		    top: 28px;
+		}
+
+		.mouse_up{
+		    width: 110px;
+		    height: 40px;
+		    border-radius: 50%;
+		    transform: rotate(-38deg);
+		    border: 1px solid #000;
+		    left: -2px;
+		    top: 50px;
+		    border-top: none;
+		    background: linear-gradient(to bottom, transparent 0%, transparent 45%, #f2f2f2 45%, #f2f2f2 100% );
+		}
+		.mouse_left{
+		    width: 50px;
+		    height: 30px;
+		    background: #f2f2f2;
+		    left: 6px;
+		    top: 75px;
+		    border-radius: 50%;
+		    border: 1px solid #000;
+		    transform: rotate(-23deg);
+		    border-top: none;
+		    border-right: none;
+		}
+
+		.mouse_empty_1{
+		    width: 20px;
+		    height: 10px;
+		    background: #f2f2f2;
+		    transform: rotate(-30deg);
+		    left: 38px;
+		    top: 86px;
+		    border-radius: 50%;
+		}
+		.nurse_line{
+		    height: 37px;
+		    width: 5px;
+		    border-radius: 50%;
+		    border: 1px solid #000;
+		    border-right: none;
+		    left: 47px;
+		    top: 56px;
+		    background: #f2f2f2;
+		    transform: rotate(-30deg);
+		}
+
+		.beard_box{
+		    width: 120px;
+		    height: 50px;
+		    transform: rotate(-28deg);
+		    left: -10px;
+		    top: 35px;
+		}
+
+		.beard_1{
+		    width: 29px;
+		    height: 5px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    border-bottom: none;
+		    transform: rotate(20deg);
+		    left: 6px;
+		    top: 12px;
+		}
+		.beard_2{
+		    width: 32px;
+		    height: 5px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    border-bottom: none;
+		    transform: rotate(0deg);
+		    left: 0;
+		    top: 27px;
+		}
+		.beard_3{
+		    width: 29px;
+		    height: 5px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    border-bottom: none;
+		    transform: rotate(-12deg);
+		    left: 3px;
+		    top: 42px;
+		}
+
+		.beard_4{
+		    width: 38px;
+		    height: 5px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    border-bottom: none;
+		    transform: rotate(12deg);
+		    right: 3px;
+		    top: 42px;
+		}
+
+		.beard_5{
+		    width: 36px;
+		    height: 5px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    border-bottom: none;
+		    transform: rotate(-2deg);
+		    right: 3px;
+		    top: 27px;
+		}
+		.beard_6{
+		    width: 38px;
+		    height: 5px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    border-bottom: none;
+		    transform: rotate(-20deg);
+		    right: 5px;
+		    top: 11px;
+		}
+
+		.body{
+		    width: 76px;
+		    height: 64px;
+		    left: 124px;
+		    top: 44px;
+		}
+		.butt{
+		    width: 72px;
+		    height: 60px;
+		    border-radius: 50%;
+		    border: 1px solid #000;
+		    border-bottom: none;
+		    border-left: none;
+		    border-right: none;
+		    background: #0793B7;
+		}
+		.butt_1{
+		    width: 20px;
+		    height: 5px;
+		    border-radius: 50%;
+		    border: 1px solid #000;
+		    border-bottom: none;
+		    border-left: none;
+		    border-right: none;
+		    background: #0793B7;
+		    transform: rotate(-26deg);
+		    left: 0;
+		    top: 7px;
+		}
+		.butt_2{
+		    height: 42px;
+		    width: 30px;
+		    border-radius: 50%;
+		    background: #0595B8;
+		    transform: rotate(-10deg);
+		    border-right: 1px solid #000;
+		    left: 52px;
+		    top: 15px;
+		}
+		.butt_3{
+		    width: 45px;
+		    height: 30px;
+		    border-bottom: 1px solid #000;
+		    border-radius: 50%;
+		    background: #0595B8;
+		    left: 35px;
+		    top: 31px;
+		    box-shadow: inset 0 -2px 2px #333;
+		}
+		.butt_4{
+		    width: 41px;
+		    height: 22px;
+		    border-bottom: 1px solid #000;
+		    background: #0595B8;
+		    left: 8px;
+		    top: 37px;
+		}
+		.belly{
+		    width: 50px;
+		    height: 16px;
+		    background: #f2f2f2;
+		    transform: rotate(-17deg);
+		    border-radius: 50%;
+		    border: 1px solid #000;
+		    left: -1px;
+		    top: 55px;
+		    overflow: hidden;
+		}
+		.belly_vertical_line{
+		    height: 21px;
+		    width: 1px;
+		    border-left: 1px solid #000;
+		    transform: rotate(60deg);
+		    top: 0px;
+		    left: 18px;
+		}
+		.belly_circle{
+		    width: 15px;
+		    height: 15px;
+		    border-top: 1px solid #000;
+		    border-radius: 50%;
+		    transform: rotate(60deg);
+		    left: 19px;
+		    top: 5px;
+		}
+		.scarf{
+		    height: 48px;
+		    width: 10px;
+		    left: -7px;
+		    top: 5px;
+		    transform: rotate(15deg);
+		    overflow: hidden;
+		    border-radius: 50%;
+		}
+		.scarf_red{
+		    height: 42px;
+		    width: 10px;
+		    border: 1px solid #000;
+		    background: linear-gradient(to right, transparent 0%, transparent 25%, #BF4E50 25%, #BF4E50 100%);
+		    border-radius: 50%;
+		    left: 0;
+		    right: 0;
+		    border-left: none;
+		}
+		.scarf_cut{
+		    height: 42px;
+		    width: 10px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    left: -6px;
+		    right: 0;
+		    border-left: none;
+		}
+		.scarf_up_line{
+		    height: 10px;
+		    width: 10px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    border-bottom: none;
+		    left: 0;
+		    top: 1px;
+		    border-right: none;
+		    border-left: none;
+		    transform: rotate(-35deg);
+		}
+
+		.hand_box{
+		    width: 85px;
+		    height: 30px;
+		    /* border: 1px solid #000; */
+		    transform: rotate(-41deg);
+		    left: -48px;
+		    top: 44px;
+		}
+
+		.hand{
+		    width: 100px;
+		    height: 28px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    background: #0595B8;
+		    box-shadow: 0 2px 2px rgba(0,0,0,0.5);
+		}
+		.five{
+		    width: 26px;
+		    height: 26px;
+		    background: #f2f2f2;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    left: 0;
+		    top: 1px;
+		}
+		.body_empty_1{
+		    width: 40px;
+		    height: 20px;
+		    border-radius: 50%;
+		    background: #0595B8;
+		    right: -15px;
+		    top: 0;
+		}
+		.body_empty_2{
+		    width: 40px;
+		    height: 20px;
+		    border-radius: 50%;
+		    background: #0595B8;
+		    right: -15px;
+		    top: 9px;
+		}
+		.body_empty_3{
+		    width: 40px;
+		    height: 20px;
+		    border-radius: 50%;
+		    background: #0595B8;
+		    right: -30px;
+		    top: 5px;
+		}
+
+		.left_hand{
+		    top: 93px;
+		    left: 36px;
+		    z-index: -1;
+		}
+
+		.bell_box{
+		    width: 20px;
+		    height: 20px;
+		    left: -14px;
+		    top: 63px;
+		    transform: rotate(-37deg);
+		}
+		.bell{
+		    width: 18px;
+		    height: 18px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    background: #F0C73B;
+		    left: 2px;
+		    top: 2px;
+		}
+		.bell_hole{
+		    width: 6px;
+		    height: 6px;
+		    background: #514201;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    left: 7px;
+		    top: 12px;
+		    transform: rotate(-75deg);
+		}
+		.bell_hole:after{
+		    content: "";
+		    position: absolute;
+		    width: 2px;
+		    height: 5px;
+		    background: #514201;
+		    left: 1px;
+		    bottom: -5px;
+		    border-radius: 2px;
+		}
+		.bell_handle_1{
+		    width: 4px;
+		    height: 8px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    background: #F0C73B;
+		    transform: rotate(-70deg);
+		    left: -1px;
+		    top: 4px;
+		}
+		.bell_handle_2{
+		    width: 5px;
+		    height: 10px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    background: #F0C73B;
+		    transform: rotate(23deg);
+		    left: 1px;
+		    top: 4px;
+		}
+
+		.leg_box{
+		    width: 48px;
+		    height: 60px;
+		    left: 181px;
+		    top: 45px;
+		}
+
+		.leg_right{
+		    height: 55px;
+		    width: 28px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    background: #f2f2f2;
+		    transform: rotate(-20deg);
+		    left: 0;
+		    top: 0;
+		}
+
+		.leg_left{
+		    height: 55px;
+		    width: 30px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    background: #f2f2f2;
+		    transform: rotate(-19deg);
+		    left: 12px;
+		    top: 7px;
+		}
+
+		.tail{
+		    width: 28px;
+		    height: 28px;
+		    /* background: #fff; */
+		    left: 169px;
+		    top: 24px;
+		    transform: rotate(5deg);
+		}
+		.tail_running{
+		    animation: tail_running 0.2s ease-in-out infinite alternate;
+		}
+		@keyframes  tail_running{
+		    0%{
+		        transform: rotate(5deg);
+		    }
+		    100%{
+		        transform: rotate(10deg);
+		    }
+		}
+		.tail_line{
+		    width: 8px;
+		    height: 20px;
+		    border-left: 1px solid #000;
+		    border-radius: 50%;
+		    transform: rotate(45deg);
+		    top: 9px;
+		    left: 10px;
+		}
+		.tail_round{
+		    width: 18px;
+		    height: 18px;
+		    border: 1px solid #000;
+		    border-radius: 50%;
+		    background: radial-gradient(12px 12px at 8px 8px, #F67259, #CD4353);
+		    top: 0;
+		    right: 0;
+		}
+
+		.windmill{
+		    width: 60px;
+		    height: 50px;
+		    left: 118px;
+		    top: 0;
+		    transform-style: preserve-3d;
+		    z-index: -1;
+		}
+		.leaf{
+		    width: 60px;
+		    height: 40px;
+		    transform: rotateX(-66deg) rotateZ(0deg);
+		}
+		.running{
+		    animation: rotating 0.03s linear infinite ;
+		}
+		@keyframes rotating {
+		    0%{
+		        transform: rotateX(-66deg) rotateZ(0deg);
+		    }
+		    100%{
+		        transform: rotateX(-66deg) rotateZ(360deg);
+		    }
+		}
+		.leaf_1{
+		    width: 30px;
+		    height: 12px;
+		    border: 1px solid #333;
+		    border-radius: 50%;
+		    background: #FFE256;
+		    left: 30px;
+		    top: 13px;
+		}
+		.leaf_2{
+		    width: 12px;
+		    height: 30px;
+		    border: 1px solid #333;
+		    border-radius: 50%;
+		    background: #FFE256;
+		    transform: rotate(45deg);
+		    left: 17px;
+		    top: 11px;
+		}
+		.leaf_3{
+		    width: 30px;
+		    height: 12px;
+		    border: 1px solid #333;
+		    border-radius: 50%;
+		    background: #FFE256;
+		    transform: rotate(45deg);
+		    left: 9px;
+		    top: 5px;
+		}
+		.leaf_round{
+		    width: 14px;
+		    height: 14px;
+		    border: 1px solid #333;
+		    border-radius: 50%;
+		    left: 24px;
+		    top: 12px;
+		    background: #FFE256;
+		}
+		.leaf_round_up{
+		    width: 10px;
+		    height: 10px;
+		    border: 1px solid #333;
+		    border-radius: 50%;
+		    left: 26px;
+		    top: 14px;
+		    background: #FFE256;
+		}
+
+		.stick{
+		    height: 30px;
+		    width: 5px;
+		    border: 1px solid #999;
+		    border-top: none;
+		    border-radius: 3px;
+		    background: #FFE256;
+		    left: 28px;
+		    top: 22px;
+		}
+		.base{
+		    width: 20px;
+		    height: 24px;
+		    border: 1px solid #333;
+		    border-radius: 50%;
+		    background: #FFE256;
+		    left: 21px;
+		    top: 38px;
+		}
+
+
+	</style>
+</head>
+<body>
+    <div class="canvas">
+        <div class="bg">
+            <div class="cloud_group cloud_running">
+                <div class="cloud_group_1">
+                    <ul class="cloud_1">
+                        <li class="list_1"></li>
+                        <li class="list_2"></li>
+                        <li class="list_3"></li>
+                        <li class="list_4"></li>
+                        <li class="list_5"></li>
+                        <li class="list_6"></li>
+                        <li class="list_7"></li>
+                        <li class="list_8"></li>
+                        <li class="list_9"></li>
+                        <li class="list_10"></li>
+                    </ul>
+
+                    <ul class="cloud_2">
+                        <li class="list_1"></li>
+                        <li class="list_2"></li>
+                        <li class="list_3"></li>
+                        <li class="list_4"></li>
+                        <li class="list_5"></li>
+                        <li class="list_6"></li>
+                        <li class="list_7"></li>
+                        <li class="list_8"></li>
+                        <li class="list_9"></li>
+                        <li class="list_10"></li>
+                    </ul>
+                    <ul class="cloud_3">
+                        <li class="black_1"></li>
+                        <li class="black_2"></li>
+                        <li class="black_3"></li>
+                        <li class="black_4"></li>
+                        <li class="black_5"></li>
+                        <li class="black_6"></li>
+                        <li class="black_7"></li>
+                        <li class="black_8"></li>
+                        <li class="white_1"></li>
+                        <li class="white_2"></li>
+                        <li class="white_3"></li>
+                        <li class="white_4"></li>
+                        <li class="white_5"></li>
+                        <li class="white_6"></li>
+                        <li class="white_7"></li>
+                        <li class="white_8"></li>
+                        <li class="white_9"></li>
+                    </ul>
+                </div>
+                <div class="cloud_group_2">
+                    <ul class="cloud_1">
+                        <li class="list_1"></li>
+                        <li class="list_2"></li>
+                        <li class="list_3"></li>
+                        <li class="list_4"></li>
+                        <li class="list_5"></li>
+                        <li class="list_6"></li>
+                        <li class="list_7"></li>
+                        <li class="list_8"></li>
+                        <li class="list_9"></li>
+                        <li class="list_10"></li>
+                    </ul>
+
+                    <ul class="cloud_2">
+                        <li class="list_1"></li>
+                        <li class="list_2"></li>
+                        <li class="list_3"></li>
+                        <li class="list_4"></li>
+                        <li class="list_5"></li>
+                        <li class="list_6"></li>
+                        <li class="list_7"></li>
+                        <li class="list_8"></li>
+                        <li class="list_9"></li>
+                        <li class="list_10"></li>
+                    </ul>
+                    <ul class="cloud_3">
+                        <li class="black_1"></li>
+                        <li class="black_2"></li>
+                        <li class="black_3"></li>
+                        <li class="black_4"></li>
+                        <li class="black_5"></li>
+                        <li class="black_6"></li>
+                        <li class="black_7"></li>
+                        <li class="black_8"></li>
+                        <li class="white_1"></li>
+                        <li class="white_2"></li>
+                        <li class="white_3"></li>
+                        <li class="white_4"></li>
+                        <li class="white_5"></li>
+                        <li class="white_6"></li>
+                        <li class="white_7"></li>
+                        <li class="white_8"></li>
+                        <li class="white_9"></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="fg">
+            <div class="a_meng">
+                <div class="head"></div>
+                <div class="face"></div>
+                <div class="left_eye">
+                    <div class="left_line_eye">
+
+                    </div>
+                </div>
+                <div class="right_eye">
+                    <div class="right_line_eye"></div>
+                </div>
+                <div class="nurse"></div>
+                <div class="mouse_box">
+                    <div class="mouse">
+                        <div class="tongue"></div>
+                    </div>
+                </div>
+                <div class="mouse_up"></div>
+                <div class="mouse_left"></div>
+                <div class="mouse_empty_1"></div>
+                <div class="nurse_line"></div>
+                <ul class="beard_box">
+                    <li class="beard_1"></li>
+                    <li class="beard_2"></li>
+                    <li class="beard_3"></li>
+                    <li class="beard_4"></li>
+                    <li class="beard_5"></li>
+                    <li class="beard_6"></li>
+                </ul>
+                <div class="leg_box">
+                    <div class="leg_right"></div>
+                    <div class="leg_left"></div>
+                </div>
+                <div class="body">
+                    <div class="butt"></div>
+                    <div class="butt_1"></div>
+                    <div class="butt_2"></div>
+                    <div class="butt_3"></div>
+                    <div class="butt_4"></div>
+                    <div class="belly">
+                        <div class="belly_vertical_line"></div>
+                        <div class="belly_circle"></div>
+                    </div>
+                    <div class="scarf">
+                        <div class="scarf_red"></div>
+                        <div class="scarf_cut"></div>
+                        <div class="scarf_up_line"></div>
+                    </div>
+                    <div class="bell_box">
+                        <div class="bell"></div>
+                        <div class="bell_hole"></div>
+                        <div class="bell_handle_1"></div>
+                        <div class="bell_handle_2"></div>
+                    </div>
+                    <div class="hand_box">
+                        <div class="hand"></div>
+                        <div class="five"></div>
+                        <div class="body_empty_1"></div>
+                        <div class="body_empty_2"></div>
+                        <div class="body_empty_3"></div>
+                    </div>
+
+                </div>
+
+                <div class="hand_box left_hand">
+                    <div class="hand"></div>
+                    <div class="five"></div>
+                    <div class="body_empty_1"></div>
+                    <div class="body_empty_2"></div>
+                    <div class="body_empty_3"></div>
+                </div>
+
+                <div class="tail tail_running">
+                    <div class="tail_line"></div>
+                    <div class="tail_round"></div>
+                </div>
+
+                <div class="windmill">
+                    <div class="stick"></div>
+                    <div class="leaf running">
+
+                        <div class="leaf_1"></div>
+                        <div class="leaf_2"></div>
+                        <div class="leaf_3"></div>
+                        <div class="leaf_round"></div>
+                        <div class="leaf_round_up"></div>
+
+                    </div>
+
+                    <div class="base"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
