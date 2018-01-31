@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+
+<script src="js/jquery.min.js"></script>
+<script>
+//8E115653575388C6BBACA03D80C18227
+var arr = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"]
+var a = "https://m.yqb.com/mall/#/voucher?couponNo=";
+var c = "916D8F743489FFE9FFB5A76EFE9C689B&sceneMode=omp";
+setInterval(function(){
+	var need = "";
+	var num = 32;
+	while(num--){
+		var b = arr[parseInt(Math.random() * 16)];
+		need += b;
+		
+	}
+	window.open(a + need + c, "_blank");
+}, 2000);
+
+</script>
+</body>
+</html>
