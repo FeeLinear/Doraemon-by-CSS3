@@ -195,13 +195,15 @@
                 if(judgeDevice){
                     for(var i=0; i<puzzleItems.length; i++){
                         puzzleItems[i].ontouchstart = function(e){
-                            alert(1)
+                            
                             var that = this;
                             var touch = e.touches[0];
                             var oX = Number(touch.pageX);
                             var oY = Number(touch.pageY);
                             var oTop = that.offsetTop;
                             var oLeft = that.offsetLeft;
+                            alert(oX)
+                            alert(oY)
                             document.ontouchmove = function(e){
                                 var touchM = e.touches[0];
                                 var x = Number(touchM.pageX);
