@@ -60,6 +60,7 @@
             align-items: center;
             justify-content: space-around;
             flex-direction: column;
+            transition: all 0.5s ease-in-out;
         }
     </style>
 </head>
@@ -191,27 +192,23 @@
             bindEvent: function(){
                 var judgeDevice = /Android|webOS|iPhone|iPad|BlackBerry/i.test(navigator.userAgent);
                 var puzzleItems = document.getElementsByClassName("puzzle_item");
-                alert(judgeDevice);
-                if(judgeDevice){
+                if(true){
                     for(var i=0; i<puzzleItems.length; i++){
                         puzzleItems[i].ontouchstart = function(e){
-                            
                             var that = this;
                             var touch = e.touches[0];
                             var oX = Number(touch.pageX);
                             var oY = Number(touch.pageY);
                             var oTop = that.offsetTop;
                             var oLeft = that.offsetLeft;
-                            alert(oX)
-                            alert(oY)
                             document.ontouchmove = function(e){
                                 var touchM = e.touches[0];
                                 var x = Number(touchM.pageX);
                                 var y = Number(touchM.pageY);
                                 var spaceX = x - oX;
                                 var spaceY = y - oY;
-                                that.style.top = oTop + spaceX;
-                                that.style.left = oLeft + spaceY;
+                                that.style.top = oTop + spaceX + "px";
+                                that.style.left = oLeft + spaceY + "px";
                             }
                             document.ontouchend = function(e){
                                 document.ontouchmove = null;
