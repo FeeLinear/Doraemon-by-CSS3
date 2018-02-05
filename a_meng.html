@@ -211,12 +211,14 @@
                             document.ontouchend = function(e){
                                 document.ontouchmove = null;
                                 document.ontouchend = null;
+                                alert(isMove);
                                 if(isMove){
                                     var touchM = e.touches[0];
                                     var x = Number(touchM.pageX);
                                     var y = Number(touchM.pageY);
                                     var spaceX = x - oX;
                                     var spaceY = y - oY;
+                                    alert(spaceX);
                                     if(spaceX > 20 && that.getAttribute("can_right") == "true" && Math.abs(spaceY) < 50){
                                         that.style.left = puzzleItemBoxes[num].offsetLeft + 1 +"px";
                                         that.setAttribute("num", num + 1);
@@ -230,8 +232,10 @@
                                         that.style.top = puzzleItemBoxes[num + self.cols -1].offsetTop + 1 +"px";
                                         that.setAttribute("num", num + self.cols);
                                     }
-                                    
-                                    self.refreshItemsPos();
+                                    setTimeout(function(){
+                                        self.refreshItemsPos();
+
+                                    }, 500);
                                 }
                                 
                             }
