@@ -205,20 +205,22 @@
                             var oLeft = that.offsetLeft;
                             var isMove = false;
                             var num = parseInt(that.getAttribute("num"));
+                            var spaceX = x - oX;
+                            var spaceY = y - oY;
                             document.ontouchmove = function(e){
                                 isMove = true;
+                                var touchM = e.touches[0];
+                                var x = Number(touchM.pageX);
+                                var y = Number(touchM.pageY);
+                                spaceX = x - oX;
+                                spaceY = y - oY;
+                                
                             }
                             document.ontouchend = function(e){
                                 document.ontouchmove = null;
                                 document.ontouchend = null;
-                                alert(isMove);
+                                alert(spaceX);
                                 if(isMove){
-                                    var touchM = e.touches[0];
-                                    var x = Number(touchM.pageX);
-                                    var y = Number(touchM.pageY);
-                                    var spaceX = x - oX;
-                                    var spaceY = y - oY;
-                                    alert(spaceX);
                                     if(spaceX > 20 && that.getAttribute("can_right") == "true" && Math.abs(spaceY) < 50){
                                         that.style.left = puzzleItemBoxes[num].offsetLeft + 1 +"px";
                                         that.setAttribute("num", num + 1);
