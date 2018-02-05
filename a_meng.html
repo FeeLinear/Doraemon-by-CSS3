@@ -190,8 +190,10 @@
                 }
             },
             bindEvent: function(){
+                var self = this;
                 var judgeDevice = /Android|webOS|iPhone|iPad|BlackBerry/i.test(navigator.userAgent);
                 var puzzleItems = document.getElementsByClassName("puzzle_item");
+                var puzzleItemBoxes = document.getElementsByClassName("c");
                 if(true){
                     for(var i=0; i<puzzleItems.length; i++){
                         puzzleItems[i].ontouchstart = function(e){
@@ -201,18 +203,37 @@
                             var oY = Number(touch.pageY);
                             var oTop = that.offsetTop;
                             var oLeft = that.offsetLeft;
+                            var isMove = false;
+                            var num = parseInt(that.getAttribute("num"));
                             document.ontouchmove = function(e){
-                                var touchM = e.touches[0];
-                                var x = Number(touchM.pageX);
-                                var y = Number(touchM.pageY);
-                                var spaceX = x - oX;
-                                var spaceY = y - oY;
-                                that.style.top = oTop + spaceX + "px";
-                                that.style.left = oLeft + spaceY + "px";
+                                isMove = true;
                             }
                             document.ontouchend = function(e){
                                 document.ontouchmove = null;
                                 document.ontouchend = null;
+                                if(isMove){
+                                    var touchM = e.touches[0];
+                                    var x = Number(touchM.pageX);
+                                    var y = Number(touchM.pageY);
+                                    var spaceX = x - oX;
+                                    var spaceY = y - oY;
+                                    if(spaceX > 20 && that.getAttribute("can_right") == "true" && Math.abs(spaceY) < 50){
+                                        that.style.left = puzzleItemBoxes[num].offsetLeft + 1 +"px";
+                                        that.setAttribute("num", num + 1);
+                                    }else if(spaceX < -20 && that.getAttribute("can_left") == "true" && Math.abs(spaceY) < 50){
+                                        that.style.left = puzzleItemBoxes[num - 2].offsetLeft + 1 +"px";
+                                        that.setAttribute("num", num - 1);
+                                    }else if(spaceY < -20 && that.getAttribute("can_top") == "true" && Math.abs(spaceX) < 50){
+                                        that.style.top = puzzleItemBoxes[num - self.cols -1].offsetTop + 1 +"px";
+                                        that.setAttribute("num", num - self.cols);
+                                    }else if(spaceY > 20 && that.getAttribute("can_bottom") == "true" && Math.abs(spaceX) < 50){
+                                        that.style.top = puzzleItemBoxes[num + self.cols -1].offsetTop + 1 +"px";
+                                        that.setAttribute("num", num + self.cols);
+                                    }
+                                    
+                                    self.refreshItemsPos();
+                                }
+                                
                             }
 
                         }
