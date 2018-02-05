@@ -191,6 +191,7 @@
             bindEvent: function(){
                 var judgeDevice = /Android|webOS|iPhone|iPad|BlackBerry/i.test(navigator.userAgent);
                 var puzzleItems = document.getElementsByClassName("puzzle_item");
+                alert(judgeDevice);
                 if(judgeDevice){
                     for(var i=0; i<puzzleItems.length; i++){
                         puzzleItems[i].ontouchstart = function(e){
