@@ -182,7 +182,7 @@
                 if(topNum >0 ){
                     topItem.setAttribute("can_bottom", "true");
                 }
-                if(rightNum <= this.nums && rightNum%this.cols != 0){
+                if(rightNum <= this.nums && (rightNum-1)%this.cols != 0){
                     rightItem.setAttribute("can_left", "true");
                 }
                 if(bottomNum <= this.nums){
