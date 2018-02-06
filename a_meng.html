@@ -1219,6 +1219,7 @@
 	<iframe src="https://www.baidu.com" id="baidu" name="baidu" style="width: 800px; height: 200px;"></iframe>
 	
 <script>
+	document.domain = "baidu.com";
 window.onload = function(){
 var doc = window.frames["baidu"].document;
 console.log(doc);
