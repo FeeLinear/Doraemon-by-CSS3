@@ -60,6 +60,8 @@
             align-items: center;
             justify-content: space-around;
             flex-direction: column;
+            color: #fff;
+            font-size: 0.4rem;
             transition: all 0.3s ease-in-out;
         }
     </style>
@@ -141,7 +143,10 @@
                     puzzleItems[i].style.top = puzzleItemBoxes[j].offsetTop + 1 +"px";
                     puzzleItems[i].style.left = puzzleItemBoxes[j].offsetLeft + 1 +"px";
                 }
-
+                if(this.isCompelete()){
+                    alert("恭喜过关！");
+                    return false;
+                }
                 this.changeAttr();
             },
             changeAttr: function(){
@@ -159,7 +164,6 @@
                     rightNum = emptyNum + 2,
                     bottomNum = emptyNum + this.cols + 1,
                     leftNum = emptyNum;
-                console.log(topNum,rightNum,bottomNum,leftNum)
 
                 for(var j=0; j<puzzleItems.length; j++){
                     puzzleItems[j].setAttribute("can_left", "false");
@@ -191,6 +195,17 @@
                 if(leftNum > 0 && leftNum%this.cols != 0){
                     leftItem.setAttribute("can_right", "true");
                 }
+            },
+            isCompelete: function(){
+                var flag = true;
+                var puzzleItems = document.getElementsByClassName("puzzle_item");
+                for(var i=0; i<puzzleItems.length; i++){
+                    if(puzzleItems[i].getAttribute("true_num") != puzzleItems[i].getAttribute("num")){
+                        flag = false;
+                        break;
+                    }
+                }
+                return flag;
             },
             bindEvent: function(){
                 var self = this;
@@ -228,16 +243,16 @@
                                 document.ontouchend = null;
                                 isEnd = false;
                                 if(isMove){
-                                    if(spaceX > 20 && that.getAttribute("can_right") == "true" && Math.abs(spaceY) < 50){
+                                    if(spaceX > 20 && that.getAttribute("can_right") == "true" && Math.abs(spaceY) < 80){
                                         that.style.left = puzzleItemBoxes[num].offsetLeft + 1 +"px";
                                         that.setAttribute("num", num + 1);
-                                    }else if(spaceX < -20 && that.getAttribute("can_left") == "true" && Math.abs(spaceY) < 50){
+                                    }else if(spaceX < -20 && that.getAttribute("can_left") == "true" && Math.abs(spaceY) < 80){
                                         that.style.left = puzzleItemBoxes[num - 2].offsetLeft + 1 +"px";
                                         that.setAttribute("num", num - 1);
-                                    }else if(spaceY < -20 && that.getAttribute("can_top") == "true" && Math.abs(spaceX) < 50){
+                                    }else if(spaceY < -20 && that.getAttribute("can_top") == "true" && Math.abs(spaceX) < 80){
                                         that.style.top = puzzleItemBoxes[num - self.cols -1].offsetTop + 1 +"px";
                                         that.setAttribute("num", num - self.cols);
-                                    }else if(spaceY > 20 && that.getAttribute("can_bottom") == "true" && Math.abs(spaceX) < 50){
+                                    }else if(spaceY > 20 && that.getAttribute("can_bottom") == "true" && Math.abs(spaceX) < 80){
                                         that.style.top = puzzleItemBoxes[num + self.cols -1].offsetTop + 1 +"px";
                                         that.setAttribute("num", num + self.cols);
                                     }
@@ -255,7 +270,7 @@
             }
             
         }
-        var puzzle = new PuzzleGame({cols: 3, rows: 5});
+        var puzzle = new PuzzleGame({cols: 2, rows: 4});
         
     </script>
 </body>
