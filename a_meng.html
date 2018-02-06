@@ -205,8 +205,8 @@
                             var oLeft = that.offsetLeft;
                             var isMove = false;
                             var num = parseInt(that.getAttribute("num"));
-                            var spaceX = x - oX;
-                            var spaceY = y - oY;
+                            var spaceX;
+                            var spaceY;
                             document.ontouchmove = function(e){
                                 isMove = true;
                                 var touchM = e.touches[0];
