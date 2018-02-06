@@ -114,7 +114,7 @@
         window.onload = function(){
             var levelItems = document.getElementsByClassName("level");
             for(var i=0; i<levelItems.length; i++){
-                levelItems[i].ontap = function(){
+                levelItems[i].ontouchstart = function(){
                     var level = this.getAttribute("level");
                     switch(level){
                         case "1":
