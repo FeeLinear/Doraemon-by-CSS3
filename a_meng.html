@@ -197,9 +197,13 @@
                 var judgeDevice = /Android|webOS|iPhone|iPad|BlackBerry/i.test(navigator.userAgent);
                 var puzzleItems = document.getElementsByClassName("puzzle_item");
                 var puzzleItemBoxes = document.getElementsByClassName("c");
-                if(true){
+                var isEnd = true;
+                if(judgeDevice){
                     for(var i=0; i<puzzleItems.length; i++){
                         puzzleItems[i].ontouchstart = function(e){
+                            if(!isEnd){
+                                return false;
+                            }
                             var that = this;
                             var touch = e.touches[0];
                             var oX = Number(touch.pageX);
@@ -222,6 +226,7 @@
                             document.ontouchend = function(e){
                                 document.ontouchmove = null;
                                 document.ontouchend = null;
+                                isEnd = false;
                                 if(isMove){
                                     if(spaceX > 20 && that.getAttribute("can_right") == "true" && Math.abs(spaceY) < 50){
                                         that.style.left = puzzleItemBoxes[num].offsetLeft + 1 +"px";
@@ -238,6 +243,7 @@
                                     }
                                     setTimeout(function(){
                                         self.refreshItemsPos();
+                                        isEnd = true;
                                     }, 300);
                                 }
                                 
