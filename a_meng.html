@@ -319,14 +319,15 @@
             for(var i=0; i<levelItems.length; i++){
                 levelItems[i].ontouchstart = function(){
                     var level = this.getAttribute("level");
-                    alert(level)
+                    alert("2")
                     switch(level){
                         case "a":
-                            alert("1")
                             puzzle = new PuzzleGame({cols: 2, rows: 4});
                             docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            alert("1");
                             break;
                         case "b":
+                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
                             puzzle = new PuzzleGame({cols: 3, rows: 5});
                             docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
