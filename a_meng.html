@@ -206,14 +206,10 @@
                     puzzleItems[i].style.top = puzzleItemBoxes[j].offsetTop + 1 +"px";
                     puzzleItems[i].style.left = puzzleItemBoxes[j].offsetLeft + 1 +"px";
                 }
-                if(this.isCompelete()){
-                    alert("恭喜过关！");
-                    location.reload();
-                    return false;
-                }
                 this.changeAttr();
             },
             changeAttr: function(){
+                var self = this;
                 var puzzleItems = document.getElementsByClassName("puzzle_item");
                 var puzzleItemBoxes = document.getElementsByClassName("c");
                 var emptyNum = 0;
@@ -259,6 +255,13 @@
                 if(leftNum > 0 && leftNum%this.cols != 0){
                     leftItem.setAttribute("can_right", "true");
                 }
+                setTimeout(function(){
+                    if(self.isCompelete()){
+                        alert("恭喜过关！");
+                        location.reload();
+                        return false;
+                    }
+                },100);
             },
             isCompelete: function(){
                 var flag = true;
