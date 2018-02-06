@@ -64,14 +64,80 @@
             font-size: 0.4rem;
             transition: all 0.1s ease-in-out;
         }
+        .shadow{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 9;
+        }
+        .shadow ul{
+            position: absolute;
+            width: 50%;
+            height: 30%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 0.2rem rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+        }
+        .shadow ul li{
+            flex: 1;
+            list-style: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
+    <div class="shadow">
+        <ul>
+            <li class="level" level="1">简单</li>
+            <li class="level" level="2">一般</li>
+            <li class="level" level="3">困难</li>
+            <li class="level" level="4">超级困难</li>
+        </ul>
+    </div>
     <div class="bg_box">
         <div class="a"></div>
         <div class="puzzle_box"></div>
     </div>
     <script>
+        window.onload = function(){
+            var levelItems = document.getElementsByClassName("level");
+            for(var i=0; i<levelItems.length; i++){
+                levelItems[i].ontap = function(){
+                    var level = this.getAttribute("level");
+                    switch(level){
+                        case "1":
+                            new PuzzleGame({cols: 2, rows: 4});
+                            break;
+                        case "2":
+                            new PuzzleGame({cols: 3, rows: 5});
+                            break;
+                        case "3":
+                            new PuzzleGame({cols: 4, rows: 6});
+                            break;
+                        case "4":
+                            new PuzzleGame({cols: 6, rows: 9});
+                            break;
+                        default: 
+                            new PuzzleGame({cols: 2, rows: 4});
+                            break;
+                    }
+                    docuemnt.getElementsByClassName(".shadow").style.display = "none";
+                }
+            }
+
+        }
         function getStyle(ele){
             if (window.getComputedStyle) {
                 return window.getComputedStyle(ele, null);    // 非IE
@@ -244,16 +310,16 @@
                                 document.ontouchend = null;
                                 isEnd = false;
                                 if(isMove){
-                                    if(spaceX > 20 && that.getAttribute("can_right") == "true" && Math.abs(spaceY) < 80){
+                                    if(spaceX > 20 && that.getAttribute("can_right") == "true" && Math.abs(spaceY) < 120){
                                         that.style.left = puzzleItemBoxes[num].offsetLeft + 1 +"px";
                                         that.setAttribute("num", num + 1);
-                                    }else if(spaceX < -20 && that.getAttribute("can_left") == "true" && Math.abs(spaceY) < 80){
+                                    }else if(spaceX < -20 && that.getAttribute("can_left") == "true" && Math.abs(spaceY) < 120){
                                         that.style.left = puzzleItemBoxes[num - 2].offsetLeft + 1 +"px";
                                         that.setAttribute("num", num - 1);
-                                    }else if(spaceY < -20 && that.getAttribute("can_top") == "true" && Math.abs(spaceX) < 80){
+                                    }else if(spaceY < -20 && that.getAttribute("can_top") == "true" && Math.abs(spaceX) < 120){
                                         that.style.top = puzzleItemBoxes[num - self.cols -1].offsetTop + 1 +"px";
                                         that.setAttribute("num", num - self.cols);
-                                    }else if(spaceY > 20 && that.getAttribute("can_bottom") == "true" && Math.abs(spaceX) < 80){
+                                    }else if(spaceY > 20 && that.getAttribute("can_bottom") == "true" && Math.abs(spaceX) < 120){
                                         that.style.top = puzzleItemBoxes[num + self.cols -1].offsetTop + 1 +"px";
                                         that.setAttribute("num", num + self.cols);
                                     }
@@ -271,7 +337,7 @@
             }
             
         }
-        var puzzle = new PuzzleGame({cols: 2, rows: 4});
+        
         
     </script>
 </body>
