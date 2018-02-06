@@ -118,6 +118,9 @@
                     doms += '<div class="puzzle_item" true_num=' + (n+1) + ' num=' + numsArr[n] + '>' + (n+1) + '</div>';
                 }
                 this.pBox.innerHTML = doms;
+                document.body.ontouchmove = function(e){
+                    e.preventDefault();
+                }
             },
             refreshItemsPos: function(){
                 var itemBox = document.getElementsByClassName("c")[0];
@@ -219,7 +222,6 @@
                             document.ontouchend = function(e){
                                 document.ontouchmove = null;
                                 document.ontouchend = null;
-                                alert(spaceX);
                                 if(isMove){
                                     if(spaceX > 20 && that.getAttribute("can_right") == "true" && Math.abs(spaceY) < 50){
                                         that.style.left = puzzleItemBoxes[num].offsetLeft + 1 +"px";
