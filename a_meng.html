@@ -157,7 +157,28 @@
                     numsArr[m] = m + 1;
                 }
                 numsArr.sort(function(){ return 0.5 - Math.random() });
+                numsArr.pop();
+                
+                createCorrectArr();
+                function createCorrectArr(){
+                    numsArr.sort(function(){ return 0.5 - Math.random() });
+                    var inversionNumber = 0;  //逆序数为偶则有解
+                    for(var x=0; x<numsArr.length-1; x++){
+                        for(var y = x + 1; y<numsArr.length; y++){
+                            if(numsArr[x] > numsArr[y]){
+                                inversionNumber += 1;
+                            }
+                        }
+                    }
+                    if(inversionNumber%2 != 0){
+                        createCorrectArr();
+                    }else{
+                        console.log(inversionNumber);
+                    }
+                }
                 console.log(numsArr);
+                
+                
                 for(var n=0; n<nums-1; n++){
                     doms += '<div class="puzzle_item" true_num=' + (n+1) + ' num=' + numsArr[n] + '>' + (n+1) + '</div>';
                 }
