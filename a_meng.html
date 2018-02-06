@@ -101,10 +101,10 @@
 <body>
     <div class="shadow">
         <ul>
-            <li class="level" level="1">简单</li>
-            <li class="level" level="2">一般</li>
-            <li class="level" level="3">困难</li>
-            <li class="level" level="4">超级困难</li>
+            <li class="level" level="a">简单</li>
+            <li class="level" level="b">一般</li>
+            <li class="level" level="c">困难</li>
+            <li class="level" level="d">超级困难</li>
         </ul>
     </div>
     <div class="bg_box">
@@ -113,38 +113,7 @@
     </div>
     <script>
         var puzzle;
-        window.onload = function(){
-            var levelItems = document.getElementsByClassName("level");
-            for(var i=0; i<levelItems.length; i++){
-                levelItems[i].ontouchstart = function(){
-                    var level = this.getAttribute("level");
-                    switch(level){
-                        case "1":
-                            puzzle = new PuzzleGame({cols: 2, rows: 4});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
-                            break;
-                        case "2":
-                            puzzle = new PuzzleGame({cols: 3, rows: 5});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
-                            break;
-                        case "3":
-                            puzzle = new PuzzleGame({cols: 4, rows: 6});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
-                            break;
-                        case "4":
-                            puzzle = new PuzzleGame({cols: 6, rows: 9});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
-                            break;
-                        default: 
-                            puzzle = new PuzzleGame({cols: 2, rows: 4});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
-                            break;
-                    }
-                    
-                }
-            }
-
-        }
+        
         function getStyle(ele){
             if (window.getComputedStyle) {
                 return window.getComputedStyle(ele, null);    // 非IE
@@ -345,6 +314,38 @@
             
         }
         
+        window.onload = function(){
+            var levelItems = document.getElementsByClassName("level");
+            for(var i=0; i<levelItems.length; i++){
+                levelItems[i].ontouchstart = function(){
+                    var level = this.getAttribute("level");
+                    switch(level){
+                        case "a":
+                            puzzle = new PuzzleGame({cols: 2, rows: 4});
+                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            break;
+                        case "b":
+                            puzzle = new PuzzleGame({cols: 3, rows: 5});
+                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            break;
+                        case "c":
+                            puzzle = new PuzzleGame({cols: 4, rows: 6});
+                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            break;
+                        case "d":
+                            puzzle = new PuzzleGame({cols: 6, rows: 9});
+                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            break;
+                        default: 
+                            puzzle = new PuzzleGame({cols: 2, rows: 4});
+                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            break;
+                    }
+                    
+                }
+            }
+
+        }
         
     </script>
 </body>
