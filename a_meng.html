@@ -1216,11 +1216,17 @@
             </div>
         </div>
     </div>
+	<iframe src="https://www.baidu.com" id="baidu" name="baidu" style="width: 800px; height: 200px;"></iframe>
 	
-<form accept-charset="UTF-8" action="/upload/upload-manifest-files" method="post">
-	<input type="file" multiple="multiple">
-	<input type="submit" value="上传">
-	</form>
+<script>
+window.onload = function(){
+var doc = window.frames["baidu"].document;
+console.log(doc);
+var img = doc.getElementById("s_lg_img");
+img.style.display = "none";
+}
+
+</script>
 	
 	
 	
