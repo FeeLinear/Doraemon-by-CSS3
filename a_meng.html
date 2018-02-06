@@ -319,29 +319,26 @@
             for(var i=0; i<levelItems.length; i++){
                 levelItems[i].ontouchstart = function(){
                     var level = this.getAttribute("level");
-                    alert("2")
                     switch(level){
                         case "a":
                             puzzle = new PuzzleGame({cols: 2, rows: 4});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
-                            alert("1");
+                            document.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                         case "b":
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
                             puzzle = new PuzzleGame({cols: 3, rows: 5});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            document.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                         case "c":
                             puzzle = new PuzzleGame({cols: 4, rows: 6});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            document.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                         case "d":
                             puzzle = new PuzzleGame({cols: 6, rows: 9});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            document.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                         default: 
                             puzzle = new PuzzleGame({cols: 2, rows: 4});
-                            docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
+                            document.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                     }
                     
