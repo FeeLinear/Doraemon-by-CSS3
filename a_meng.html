@@ -111,6 +111,7 @@
         <div class="puzzle_box"></div>
     </div>
     <script>
+        var puzzle;
         window.onload = function(){
             var levelItems = document.getElementsByClassName("level");
             for(var i=0; i<levelItems.length; i++){
@@ -118,23 +119,23 @@
                     var level = this.getAttribute("level");
                     switch(level){
                         case "1":
-                            new PuzzleGame({cols: 2, rows: 4});
+                            puzzle = new PuzzleGame({cols: 2, rows: 4});
                             docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                         case "2":
-                            new PuzzleGame({cols: 3, rows: 5});
+                            puzzle = new PuzzleGame({cols: 3, rows: 5});
                             docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                         case "3":
-                            new PuzzleGame({cols: 4, rows: 6});
+                            puzzle = new PuzzleGame({cols: 4, rows: 6});
                             docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                         case "4":
-                            new PuzzleGame({cols: 6, rows: 9});
+                            puzzle = new PuzzleGame({cols: 6, rows: 9});
                             docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                         default: 
-                            new PuzzleGame({cols: 2, rows: 4});
+                            puzzle = new PuzzleGame({cols: 2, rows: 4});
                             docuemnt.getElementsByClassName("shadow")[0].style.display = "none";
                             break;
                     }
